@@ -1,0 +1,19 @@
+; Offline Godot 4 training client. No remote service configuration is stored here.
+config_version=5
+
+[application]
+config/name="SIH 26247 Offline Trainer"
+run/main_scene="res://2d/Main2D.tscn"
+
+[autoload]
+EventRecorder="*res://2d/event_recorder.gd"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

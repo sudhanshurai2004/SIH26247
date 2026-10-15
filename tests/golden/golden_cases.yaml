@@ -1,0 +1,119 @@
+# PROPOSED reference spec (authored by hand, NOT recovered from the blueprint).
+# Uses doctrine_generic_demo_v1.yaml. Times in ms. Expected values hand-computed; see notes per case.
+# per-target s = .20*detect + .30*classify + .35*respond + .15*max(0,1-dt/20)
+G1:
+  note: "hostile, dt 2s, correct, best inner response. s=.2+.3+.35+.135=.985"
+  status: completed
+  targets: [{id: h1, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}]
+  events:
+    - {id: e1, t_ms: 2000, type: DETECT, target: h1}
+    - {id: e2, t_ms: 3000, type: CLASSIFY, target: h1, value: hostile_small_uas}
+    - {id: e3, t_ms: 5000, type: RESPOND, target: h1, value: soft_response}
+  expect: {total: 98.5, critical: [], ignored_duplicates: 0, rating_eligible: true, per_target: {h1: 0.985}}
+G2:
+  note: "3 birds called hostile, one engaged. each s=.2+0+0+.135=.335; raw 33.5; one critical -25 => 8.5"
+  status: completed
+  targets:
+    - {id: b1, true_class: bird, t_visible_ms: 0, response_zone: inner}
+    - {id: b2, true_class: bird, t_visible_ms: 0, response_zone: inner}
+    - {id: b3, true_class: bird, t_visible_ms: 0, response_zone: inner}
+  events:
+    - {id: e1, t_ms: 2000, type: DETECT, target: b1}
+    - {id: e2, t_ms: 2500, type: CLASSIFY, target: b1, value: hostile_small_uas}
+    - {id: e3, t_ms: 3000, type: RESPOND, target: b1, value: hard_response}
+    - {id: e4, t_ms: 2000, type: DETECT, target: b2}
+    - {id: e5, t_ms: 2500, type: CLASSIFY, target: b2, value: hostile_small_uas}
+    - {id: e6, t_ms: 2000, type: DETECT, target: b3}
+    - {id: e7, t_ms: 2500, type: CLASSIFY, target: b3, value: hostile_small_uas}
+  expect: {total: 8.5, critical: ["engage_nonhostile:b1"], ignored_duplicates: 0, rating_eligible: true, per_target: {b1: 0.335, b2: 0.335, b3: 0.335}}
+G3:
+  note: "friendly engaged. s=.2+.3+0+.12=.62; raw 62; -25=37; cap 30 => 30.0"
+  status: completed
+  targets: [{id: f1, true_class: friendly_aircraft, t_visible_ms: 0, response_zone: inner}]
+  events:
+    - {id: e1, t_ms: 4000, type: DETECT, target: f1}
+    - {id: e2, t_ms: 5000, type: CLASSIFY, target: f1, value: friendly_aircraft}
+    - {id: e3, t_ms: 6000, type: RESPOND, target: f1, value: soft_response}
+  expect: {total: 30.0, critical: ["engage_nonhostile:f1"], ignored_duplicates: 0, rating_eligible: true, per_target: {f1: 0.62}}
+G4:
+  note: "benign-only, all best responses at outer zone; each s=.985"
+  status: completed
+  targets:
+    - {id: c1, true_class: civil_uas, t_visible_ms: 0, response_zone: outer}
+    - {id: b1, true_class: bird, t_visible_ms: 0, response_zone: outer}
+  events:
+    - {id: e1, t_ms: 2000, type: DETECT, target: c1}
+    - {id: e2, t_ms: 3000, type: CLASSIFY, target: c1, value: civil_uas}
+    - {id: e3, t_ms: 4000, type: RESPOND, target: c1, value: observe_and_report}
+    - {id: e4, t_ms: 2000, type: DETECT, target: b1}
+    - {id: e5, t_ms: 3000, type: CLASSIFY, target: b1, value: bird}
+    - {id: e6, t_ms: 4000, type: RESPOND, target: b1, value: observe}
+  expect: {total: 98.5, critical: [], ignored_duplicates: 0, rating_eligible: true, per_target: {c1: 0.985, b1: 0.985}}
+G5:
+  note: "late-appearing target: t_visible 40s, detect 52s => dt 12s (NOT 52s). time=.4; s=.2+.3+.35+.06=.91"
+  status: completed
+  targets: [{id: h1, true_class: hostile_small_uas, t_visible_ms: 40000, response_zone: outer, reaches_inner: false}]
+  events:
+    - {id: e1, t_ms: 52000, type: DETECT, target: h1}
+    - {id: e2, t_ms: 53000, type: CLASSIFY, target: h1, value: hostile_small_uas}
+    - {id: e3, t_ms: 54000, type: RESPOND, target: h1, value: alert_and_track}
+  expect: {total: 91.0, critical: [], ignored_duplicates: 0, rating_eligible: true, per_target: {h1: 0.91}}
+G6:
+  note: "swarm of 6: 4 handled (dt 4s, s=.97), 2 missed at inner (s=0, 2 criticals). raw=388/6=64.67; -50 => 14.67"
+  status: completed
+  targets:
+    - {id: h1, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}
+    - {id: h2, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}
+    - {id: h3, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}
+    - {id: h4, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}
+    - {id: h5, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}
+    - {id: h6, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}
+  events:
+    - {id: a1, t_ms: 4000, type: DETECT, target: h1}
+    - {id: a2, t_ms: 5000, type: CLASSIFY, target: h1, value: hostile_small_uas}
+    - {id: a3, t_ms: 6000, type: RESPOND, target: h1, value: soft_response}
+    - {id: b1, t_ms: 4000, type: DETECT, target: h2}
+    - {id: b2, t_ms: 5000, type: CLASSIFY, target: h2, value: hostile_small_uas}
+    - {id: b3, t_ms: 6000, type: RESPOND, target: h2, value: soft_response}
+    - {id: c1, t_ms: 4000, type: DETECT, target: h3}
+    - {id: c2, t_ms: 5000, type: CLASSIFY, target: h3, value: hostile_small_uas}
+    - {id: c3, t_ms: 6000, type: RESPOND, target: h3, value: soft_response}
+    - {id: d1, t_ms: 4000, type: DETECT, target: h4}
+    - {id: d2, t_ms: 5000, type: CLASSIFY, target: h4, value: hostile_small_uas}
+    - {id: d3, t_ms: 6000, type: RESPOND, target: h4, value: soft_response}
+  expect:
+    total: 14.67
+    critical: ["miss_hostile_at_inner_zone:h5", "miss_hostile_at_inner_zone:h6"]
+    ignored_duplicates: 0
+    rating_eligible: true
+    per_target: {h1: 0.97, h2: 0.97, h3: 0.97, h4: 0.97, h5: 0.0, h6: 0.0}
+G7:
+  note: "no action at all; hostile reaches inner => critical; floored at 0"
+  status: completed
+  targets: [{id: h1, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}]
+  events: []
+  expect: {total: 0.0, critical: ["miss_hostile_at_inner_zone:h1"], ignored_duplicates: 0, rating_eligible: true, per_target: {h1: 0.0}}
+G8:
+  note: "G1 events resent (offline outbox retry): 3 duplicate ids ignored, score unchanged"
+  status: completed
+  targets: [{id: h1, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}]
+  events:
+    - {id: e1, t_ms: 2000, type: DETECT, target: h1}
+    - {id: e2, t_ms: 3000, type: CLASSIFY, target: h1, value: hostile_small_uas}
+    - {id: e3, t_ms: 5000, type: RESPOND, target: h1, value: soft_response}
+    - {id: e1, t_ms: 2000, type: DETECT, target: h1}
+    - {id: e2, t_ms: 3000, type: CLASSIFY, target: h1, value: hostile_small_uas}
+    - {id: e3, t_ms: 5000, type: RESPOND, target: h1, value: soft_response}
+  expect: {total: 98.5, critical: [], ignored_duplicates: 3, rating_eligible: true, per_target: {h1: 0.985}}
+G9:
+  note: "interrupted session: no miss-critical, s=.2+.3+0+.135=.635, excluded from ratings"
+  status: interrupted
+  targets: [{id: h1, true_class: hostile_small_uas, t_visible_ms: 0, response_zone: inner, reaches_inner: true}]
+  events:
+    - {id: e1, t_ms: 2000, type: DETECT, target: h1}
+    - {id: e2, t_ms: 3000, type: CLASSIFY, target: h1, value: hostile_small_uas}
+  expect: {total: 63.5, critical: [], ignored_duplicates: 0, rating_eligible: false, per_target: {h1: 0.635}}
+G10:
+  note: "invalid doctrine upload: weights sum 1.1 -> rejected, previous doctrine stays active (apply in API layer)"
+  doctrine_override: {weights: {detect: 0.25, classify: 0.30, respond: 0.35, time: 0.20}}
+  expect_errors: [weights_sum_invalid]

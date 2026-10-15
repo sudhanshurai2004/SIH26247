@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sih26247.local/contracts/event_v2.schema.json",
+  "title": "SIH 26247 Trainee Event Contract v2",
+  "description": "Idempotent abstract trainee event for contract-v2 training scoring. t_offset_ms is logical playback time only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "event_id",
+    "session_id",
+    "scenario_id",
+    "trainee_id",
+    "event_type",
+    "t_offset_ms",
+    "sequence",
+    "payload"
+  ],
+  "properties": {
+    "contract_version": { "const": "2.0" },
+    "event_id": { "type": "string", "format": "uuid" },
+    "session_id": { "type": "string", "format": "uuid" },
+    "scenario_id": { "$ref": "#/$defs/id" },
+    "trainee_id": { "$ref": "#/$defs/id" },
+    "event_type": { "enum": ["detect", "classify", "assess", "respond", "session_interrupted"] },
+    "t_offset_ms": { "type": "integer", "minimum": 0, "maximum": 86400000 },
+    "sequence": { "type": "integer", "minimum": 0 },
+    "payload": { "type": "object" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "event_type": { "const": "detect" } } },
+      "then": { "properties": { "payload": { "$ref": "#/$defs/detectPayload" } } }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "classify" } } },
+      "then": { "properties": { "payload": { "$ref": "#/$defs/classifyPayload" } } }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "assess" } } },
+      "then": { "properties": { "payload": { "$ref": "#/$defs/assessPayload" } } }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "respond" } } },
+      "then": { "properties": { "payload": { "$ref": "#/$defs/respondPayload" } } }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "session_interrupted" } } },
+      "then": { "properties": { "payload": { "$ref": "#/$defs/interruptionPayload" } } }
+    }
+  ],
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{1,63}$" },
+    "classLabel": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,31}$" },
+    "responseLabel": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "targetPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id"],
+      "properties": { "target_id": { "$ref": "#/$defs/id" } }
+    },
+    "detectPayload": {
+      "allOf": [
+        { "$ref": "#/$defs/targetPayload" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "target_id": { "$ref": "#/$defs/id" },
+            "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      ]
+    },
+    "classifyPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id", "classification"],
+      "properties": {
+        "target_id": { "$ref": "#/$defs/id" },
+        "classification": { "$ref": "#/$defs/classLabel" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "assessPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id", "assessment"],
+      "properties": {
+        "target_id": { "$ref": "#/$defs/id" },
+        "assessment": { "enum": ["unknown", "low", "medium", "high"] }
+      }
+    },
+    "respondPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id", "response"],
+      "properties": {
+        "target_id": { "$ref": "#/$defs/id" },
+        "response": { "$ref": "#/$defs/responseLabel" }
+      }
+    },
+    "interruptionPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason"],
+      "properties": {
+        "reason": { "enum": ["device_shutdown", "user_exit", "application_error"] },
+        "detail": { "type": "string", "maxLength": 500 }
+      }
+    }
+  }
+}

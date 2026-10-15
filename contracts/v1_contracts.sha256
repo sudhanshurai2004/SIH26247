@@ -1,0 +1,6 @@
+# Frozen v1 contract file digests at the v2 additive-contract boundary.
+# Verify with: sha256sum --check contracts/v1_contracts.sha256
+# Do not edit v1 schemas for v2 behavior; add a separately versioned contract.
+19feb2b51a361c598756d399f4582e8c190a88476e5aee440bf3feb2deec2374  contracts/scenario.schema.json
+61ba1a3dd6690620446cd2e55066afc62987b40ce19d948e58aeeb4119ed99a2  contracts/event.schema.json
+f6c5235e6d077672b896f034301bcbdb2b26133da65ab859adcc3ebc3552f32f  contracts/doctrine.schema.json

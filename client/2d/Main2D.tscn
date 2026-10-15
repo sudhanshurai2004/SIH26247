@@ -1,0 +1,147 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://2d/main_2d.gd" id="1_main"]
+[ext_resource type="Script" path="res://2d/scenario_player.gd" id="2_player"]
+[ext_resource type="Script" path="res://2d/local_api_bridge.gd" id="3_api"]
+
+[node name="Main2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.027, 0.082, 0.122, 1)
+mouse_filter = 2
+
+[node name="ScenarioPlayer" type="Node" parent="."]
+script = ExtResource("2_player")
+
+[node name="LocalApiBridge" type="Node" parent="."]
+script = ExtResource("3_api")
+
+[node name="Layout" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Radar" type="Control" parent="Layout"]
+custom_minimum_size = Vector2(640, 540)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 540.0
+
+[node name="RadarBackground" type="ColorRect" parent="Layout/Radar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04, 0.16, 0.2, 1)
+mouse_filter = 2
+
+[node name="Controls" type="VBoxContainer" parent="Layout"]
+layout_mode = 0
+offset_left = 680.0
+offset_right = 1180.0
+offset_bottom = 560.0
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Layout/Controls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "2D Training Playback"
+
+[node name="Status" type="Label" parent="Layout/Controls"]
+layout_mode = 2
+text = "0 ms"
+
+[node name="Play" type="Button" parent="Layout/Controls"]
+layout_mode = 2
+text = "Play / Pause"
+
+[node name="Timeline" type="HSlider" parent="Layout/Controls"]
+layout_mode = 2
+max_value = 12000.0
+step = 100.0
+
+[node name="TargetSelect" type="OptionButton" parent="Layout/Controls"]
+layout_mode = 2
+
+[node name="Detect" type="Button" parent="Layout/Controls"]
+layout_mode = 2
+text = "Detect"
+
+[node name="ClassifySelect" type="OptionButton" parent="Layout/Controls"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "simulated_threat"
+popup/item_0/id = 0
+popup/item_1/text = "unknown"
+popup/item_1/id = 1
+
+[node name="Classify" type="Button" parent="Layout/Controls"]
+layout_mode = 2
+text = "Classify"
+
+[node name="AssessSelect" type="OptionButton" parent="Layout/Controls"]
+layout_mode = 2
+item_count = 3
+selected = 1
+popup/item_0/text = "low"
+popup/item_0/id = 0
+popup/item_1/text = "medium"
+popup/item_1/id = 1
+popup/item_2/text = "high"
+popup/item_2/id = 2
+
+[node name="Assess" type="Button" parent="Layout/Controls"]
+layout_mode = 2
+text = "Assess"
+
+[node name="RespondSelect" type="OptionButton" parent="Layout/Controls"]
+layout_mode = 2
+item_count = 4
+selected = 1
+popup/item_0/text = "monitor"
+popup/item_0/id = 0
+popup/item_1/text = "report"
+popup/item_1/id = 1
+popup/item_2/text = "escalate"
+popup/item_2/id = 2
+popup/item_3/text = "defer"
+popup/item_3/id = 3
+
+[node name="Respond" type="Button" parent="Layout/Controls"]
+layout_mode = 2
+text = "Respond"
+
+[node name="Complete" type="Button" parent="Layout/Controls"]
+layout_mode = 2
+text = "Complete session"
+
+[connection signal="pressed" from="Layout/Controls/Play" to="." method="_on_play_pressed"]
+[connection signal="value_changed" from="Layout/Controls/Timeline" to="." method="_on_timeline_value_changed"]
+[connection signal="pressed" from="Layout/Controls/Detect" to="." method="_on_detect_pressed"]
+[connection signal="pressed" from="Layout/Controls/Classify" to="." method="_on_classify_pressed"]
+[connection signal="pressed" from="Layout/Controls/Assess" to="." method="_on_assess_pressed"]
+[connection signal="pressed" from="Layout/Controls/Respond" to="." method="_on_respond_pressed"]
+[connection signal="pressed" from="Layout/Controls/Complete" to="." method="_on_complete_pressed"]

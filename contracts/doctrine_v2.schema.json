@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sih26247.local/contracts/doctrine_v2.schema.json",
+  "title": "SIH 26247 Training Doctrine Contract v2",
+  "description": "Editable abstract training-only scoring policy. It must not encode real-world tactics, weapon control, targeting, or electronic-warfare techniques.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "doctrine_id",
+    "version",
+    "title",
+    "label",
+    "training_only",
+    "classes",
+    "scoring",
+    "roe",
+    "response_matrix",
+    "decision_tree"
+  ],
+  "properties": {
+    "contract_version": { "const": "2.0" },
+    "doctrine_id": { "$ref": "#/$defs/id" },
+    "version": { "$ref": "#/$defs/semver" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "label": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "training_only": { "const": true },
+    "classes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/classLabel" }
+    },
+    "partial_credit": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": { "$ref": "#/$defs/classLabel" }
+      }
+    },
+    "scoring": { "$ref": "#/$defs/scoring" },
+    "roe": { "$ref": "#/$defs/roe" },
+    "response_matrix": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/classResponse" }
+    },
+    "decision_tree": { "$ref": "#/$defs/decisionTree" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{1,63}$" },
+    "semver": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$" },
+    "skillTag": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{1,31}$" },
+    "classLabel": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,31}$" },
+    "responseLabel": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,63}$" },
+    "scoreWeight": { "type": "number", "minimum": 0, "maximum": 1 },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_score",
+        "weights",
+        "detection_delay",
+        "session_aggregate",
+        "critical_rules",
+        "friendly_score_cap"
+      ],
+      "properties": {
+        "max_score": { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "weights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["detect", "classify", "assess", "respond", "time"],
+          "properties": {
+            "detect": { "$ref": "#/$defs/scoreWeight" },
+            "classify": { "$ref": "#/$defs/scoreWeight" },
+            "assess": { "$ref": "#/$defs/scoreWeight" },
+            "respond": { "$ref": "#/$defs/scoreWeight" },
+            "time": { "$ref": "#/$defs/scoreWeight" }
+          }
+        },
+        "detection_delay": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["max_ms"],
+          "properties": { "max_ms": { "type": "integer", "minimum": 1 } }
+        },
+        "session_aggregate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["method", "floor_score"],
+          "properties": {
+            "method": { "const": "mean_per_target" },
+            "floor_score": { "type": "number", "minimum": 0, "maximum": 1000 }
+          }
+        },
+        "critical_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["engage_nonhostile", "miss_hostile_at_inner_zone"],
+          "properties": {
+            "engage_nonhostile": { "$ref": "#/$defs/engageNonHostileRule" },
+            "miss_hostile_at_inner_zone": { "$ref": "#/$defs/missHostileRule" }
+          }
+        },
+        "friendly_score_cap": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cap_score", "trigger_classes"],
+          "properties": {
+            "cap_score": { "type": "number", "minimum": 0, "maximum": 1000 },
+            "trigger_classes": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/classLabel" }
+            }
+          }
+        }
+      }
+    },
+    "engageNonHostileRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["penalty_points", "protected_classes"],
+      "properties": {
+        "penalty_points": { "type": "number", "minimum": 0, "maximum": 1000 },
+        "protected_classes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/classLabel" }
+        }
+      }
+    },
+    "missHostileRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["penalty_points", "hostile_classes"],
+      "properties": {
+        "penalty_points": { "type": "number", "minimum": 0, "maximum": 1000 },
+        "hostile_classes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/classLabel" }
+        }
+      }
+    },
+    "roe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_responses", "engagement_actions", "no_weapon_or_targeting"],
+      "properties": {
+        "allowed_responses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/responseLabel" }
+        },
+        "engagement_actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/responseLabel" }
+        },
+        "no_weapon_or_targeting": { "const": true }
+      }
+    },
+    "responseRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["best", "acceptable"],
+      "properties": {
+        "best": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/responseLabel" }
+        },
+        "acceptable": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/responseLabel" }
+        }
+      }
+    },
+    "classResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outer", "inner"],
+      "properties": {
+        "outer": { "$ref": "#/$defs/responseRule" },
+        "inner": { "$ref": "#/$defs/responseRule" }
+      }
+    },
+    "decisionTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root_node_id", "nodes"],
+      "properties": {
+        "root_node_id": { "$ref": "#/$defs/id" },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/decisionNode" }
+        }
+      }
+    },
+    "decisionNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "action", "skill_tags", "expected_values", "branches"],
+      "properties": {
+        "node_id": { "$ref": "#/$defs/id" },
+        "action": { "enum": ["detect", "classify", "assess", "respond"] },
+        "skill_tags": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/skillTag" }
+        },
+        "expected_values": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+        },
+        "branches": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["correct", "incorrect", "timeout"],
+          "properties": {
+            "correct": { "$ref": "#/$defs/nodeReference" },
+            "incorrect": { "$ref": "#/$defs/nodeReference" },
+            "timeout": { "$ref": "#/$defs/nodeReference" }
+          }
+        }
+      }
+    },
+    "nodeReference": { "type": ["string", "null"], "pattern": "^[A-Za-z][A-Za-z0-9_-]{1,63}$" }
+  }
+}

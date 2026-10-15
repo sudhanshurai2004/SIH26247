@@ -1,0 +1,2 @@
+$ PYTHONPATH=. .venv/bin/python scripts/migrate_v1_to_v2.py --scenario-input contracts/samples/scenario.valid.json --scenario-output /tmp/sih-v2-scenario.json --event-input contracts/samples/event.valid.json --event-output-dir /tmp/sih-v2-events --doctrine-input doctrine/generic_demo.yaml --doctrine-output /tmp/sih-v2-doctrine.yaml
+{"outputs": ["/tmp/sih-v2-scenario.json", "/tmp/sih-v2-doctrine.yaml", "/tmp/sih-v2-events/event.valid.json"], "status": "ok"}

@@ -1,0 +1,23 @@
+# PLACEHOLDER, training-only, generic. Not real doctrine. Values are for golden tests only.
+doctrine: generic-demo-v1
+classes: [hostile_small_uas, civil_uas, bird, friendly_aircraft, clutter]
+weights: { detect: 0.20, classify: 0.30, respond: 0.35, time: 0.15 }   # must sum to 1.0
+dt_max_s: 20
+critical_penalty_points: 25
+cap_on_engage_friendly: 30          # session score cannot exceed this
+engagement_actions: [soft_response, hard_response]
+partial_credit:                     # classification answers worth 0.5 for a true class
+  hostile_small_uas: [civil_uas]
+response_matrix:                    # best = 1.0, acceptable = 0.5, anything else = 0
+  hostile_small_uas:
+    outer: { best: [alert_and_track], acceptable: [observe] }
+    inner: { best: [soft_response],   acceptable: [hard_response, alert_and_track] }
+  civil_uas:
+    outer: { best: [observe_and_report], acceptable: [observe] }
+    inner: { best: [warn],               acceptable: [observe_and_report] }
+  bird:
+    outer: { best: [observe], acceptable: [] }
+    inner: { best: [observe], acceptable: [] }
+  friendly_aircraft:
+    outer: { best: [observe],   acceptable: [] }
+    inner: { best: [hold_fire], acceptable: [observe] }

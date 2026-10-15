@@ -1,0 +1,71 @@
+# GENERIC DEMO PLACEHOLDER — TRAINING ONLY; NOT REAL DOCTRINE.
+# This abstract configuration deliberately contains no weapon control, targeting,
+# electronic-warfare technique, or real operational procedure.
+contract_version: "1.0"
+doctrine_id: generic-demo-v1
+version: "1.0.0"
+title: "Generic Demo Doctrine"
+label: "GENERIC DEMO PLACEHOLDER — TRAINING ONLY; NOT REAL DOCTRINE"
+training_only: true
+scoring:
+  max_score: 100
+  weights:
+    detect: 0.40
+    classify: 0.25
+    assess: 0.20
+    respond: 0.15
+  detection_delay:
+    excellent_ms: 2000
+    acceptable_ms: 5000
+    late_ms: 8000
+roe:
+  allowed_responses:
+    - monitor
+    - report
+    - escalate
+    - defer
+  no_weapon_or_targeting: true
+decision_tree:
+  root_node_id: detect-node
+  nodes:
+    - node_id: detect-node
+      action: detect
+      skill_tags:
+        - detection
+      expected_values:
+        - detected
+      branches:
+        correct: classify-node
+        incorrect: classify-node
+        timeout: classify-node
+    - node_id: classify-node
+      action: classify
+      skill_tags:
+        - classification
+      expected_values:
+        - simulated_threat
+      branches:
+        correct: assess-node
+        incorrect: assess-node
+        timeout: assess-node
+    - node_id: assess-node
+      action: assess
+      skill_tags:
+        - assessment
+      expected_values:
+        - high
+      branches:
+        correct: respond-node
+        incorrect: respond-node
+        timeout: respond-node
+    - node_id: respond-node
+      action: respond
+      skill_tags:
+        - response
+      expected_values:
+        - report
+        - escalate
+      branches:
+        correct: null
+        incorrect: null
+        timeout: null

@@ -1,0 +1,7 @@
+# Direct runtime dependencies. Exact resolved pins live in requirements.lock.
+fastapi==0.115.12
+jsonschema==4.23.0
+numpy==2.2.5
+PyYAML==6.0.2
+SQLAlchemy==2.1.4
+uvicorn==0.34.2

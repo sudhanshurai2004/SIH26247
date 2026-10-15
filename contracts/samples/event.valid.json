@@ -1,0 +1,15 @@
+{
+  "contract_version": "1.0",
+  "event_id": "6fcd2e5d-eada-45d0-8c8e-6aa4a46f8f11",
+  "session_id": "3a032023-da93-4c8b-8e7d-32575c7fe441",
+  "scenario_id": "demo-v0-0001",
+  "trainee_id": "trainee-001",
+  "event_type": "classify",
+  "t_offset_ms": 4200,
+  "sequence": 2,
+  "payload": {
+    "target_id": "target-01",
+    "classification": "simulated_threat",
+    "confidence": 0.8
+  }
+}

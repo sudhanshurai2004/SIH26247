@@ -1,0 +1,34 @@
+contract_version: "1.0"
+doctrine_id: generic-demo-v1
+version: "1.0.0"
+title: "Unsafe Example"
+label: "INVALID SAMPLE — MUST BE REJECTED"
+training_only: false
+scoring:
+  max_score: 100
+  weights:
+    detect: 0.40
+    classify: 0.25
+    assess: 0.20
+    respond: 0.15
+  detection_delay:
+    excellent_ms: 2000
+    acceptable_ms: 5000
+    late_ms: 8000
+roe:
+  allowed_responses:
+    - engage
+  no_weapon_or_targeting: false
+decision_tree:
+  root_node_id: detect-node
+  nodes:
+    - node_id: detect-node
+      action: detect
+      skill_tags:
+        - detection
+      expected_values:
+        - detected
+      branches:
+        correct: null
+        incorrect: null
+        timeout: null

@@ -1,0 +1,4 @@
+$ sha256sum --check contracts/v1_contracts.sha256
+contracts/scenario.schema.json: OK
+contracts/event.schema.json: OK
+contracts/doctrine.schema.json: OK

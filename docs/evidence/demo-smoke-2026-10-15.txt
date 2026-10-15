@@ -1,0 +1,8 @@
+$ PYTHONPATH=. .venv/bin/python scripts/demo_smoke.py
+DEMO_SMOKE_OK: seeded three disposable ready sessions
+DEMO_SMOKE_OK: health=ok instructor=instructor trainee=trainee
+DEMO_SMOKE_OK: generic doctrine=generic-demo-v1@1.0.0
+DEMO_SMOKE_OK: scripted score=100.0 replay_targets=1
+DEMO_SMOKE_OK: night-rain score=100.0
+DEMO_SMOKE_OK: unit_completed_sessions=2 trend_points=1
+DEMO_SMOKE_BOUNDARY: native Godot interaction, rendering, and FPS were not run

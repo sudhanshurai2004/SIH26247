@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scenes3d/view_3d.gd" id="1_view"]
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 1
+background_color = Color(0.466667, 0.662745, 0.788235, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.6, 0.7, 0.8, 1)
+ambient_light_energy = 0.6
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+size = Vector2(200, 200)
+
+[sub_resource type="StandardMaterial3D" id="Material_ground"]
+albedo_color = Color(0.18, 0.31, 0.18, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_building"]
+size = Vector3(6, 18, 6)
+
+[sub_resource type="StandardMaterial3D" id="Material_building"]
+albedo_color = Color(0.3, 0.35, 0.42, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_target"]
+radius = 0.7
+height = 1.4
+
+[node name="Main3D" type="Node3D"]
+script = ExtResource("1_view")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -30, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92, 0.39, 0, -0.39, 0.92, 0, 18, 30)
+current = true
+
+[node name="RuralGround" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+material_override = SubResource("Material_ground")
+
+[node name="UrbanBlocks" type="Node3D" parent="."]
+visible = false
+
+[node name="BuildingA" type="MeshInstance3D" parent="UrbanBlocks"]
+position = Vector3(-9, 9, -8)
+mesh = SubResource("BoxMesh_building")
+material_override = SubResource("Material_building")
+
+[node name="BuildingB" type="MeshInstance3D" parent="UrbanBlocks"]
+position = Vector3(9, 9, -4)
+mesh = SubResource("BoxMesh_building")
+material_override = SubResource("Material_building")
+
+[node name="AbstractTarget" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3, 0)
+mesh = SubResource("SphereMesh_target")

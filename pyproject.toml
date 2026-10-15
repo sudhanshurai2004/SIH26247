@@ -1,0 +1,30 @@
+[project]
+name = "sih26247-trainer"
+version = "0.1.0"
+description = "Offline AI-enabled drone and counter-drone threat simulation trainer"
+requires-python = ">=3.11,<3.12"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = [
+  ".venv",
+  "dashboard/node_modules",
+  "dashboard/dist",
+  # Preserve the hand-supplied reference implementation byte-for-byte.
+  "tests/golden/reference_scorer.py",
+  "tests/golden/test_golden_reference.py",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"

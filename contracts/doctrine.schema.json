@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sih26247.local/contracts/doctrine.schema.json",
+  "title": "SIH 26247 Training Doctrine Contract",
+  "description": "Editable, abstract training scoring and decision-tree configuration. It must not encode real-world tactics, weapon control, targeting, or electronic-warfare techniques.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "doctrine_id",
+    "version",
+    "title",
+    "label",
+    "training_only",
+    "scoring",
+    "roe",
+    "decision_tree"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "1.0"
+    },
+    "doctrine_id": {
+      "$ref": "#/$defs/id"
+    },
+    "version": {
+      "$ref": "#/$defs/semver"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "training_only": {
+      "const": true
+    },
+    "scoring": {
+      "$ref": "#/$defs/scoring"
+    },
+    "roe": {
+      "$ref": "#/$defs/roe"
+    },
+    "decision_tree": {
+      "$ref": "#/$defs/decisionTree"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{2,63}$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "skillTag": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{1,31}$"
+    },
+    "scoreWeight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "scoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_score",
+        "weights",
+        "detection_delay"
+      ],
+      "properties": {
+        "max_score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "weights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "detect",
+            "classify",
+            "assess",
+            "respond"
+          ],
+          "properties": {
+            "detect": {
+              "$ref": "#/$defs/scoreWeight"
+            },
+            "classify": {
+              "$ref": "#/$defs/scoreWeight"
+            },
+            "assess": {
+              "$ref": "#/$defs/scoreWeight"
+            },
+            "respond": {
+              "$ref": "#/$defs/scoreWeight"
+            }
+          }
+        },
+        "detection_delay": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "excellent_ms",
+            "acceptable_ms",
+            "late_ms"
+          ],
+          "properties": {
+            "excellent_ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "acceptable_ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "late_ms": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "roe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed_responses",
+        "no_weapon_or_targeting"
+      ],
+      "properties": {
+        "allowed_responses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "monitor",
+              "report",
+              "escalate",
+              "defer"
+            ]
+          }
+        },
+        "no_weapon_or_targeting": {
+          "const": true
+        }
+      }
+    },
+    "decisionTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root_node_id",
+        "nodes"
+      ],
+      "properties": {
+        "root_node_id": {
+          "$ref": "#/$defs/id"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/$defs/decisionNode"
+          }
+        }
+      }
+    },
+    "decisionNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "action",
+        "skill_tags",
+        "expected_values",
+        "branches"
+      ],
+      "properties": {
+        "node_id": {
+          "$ref": "#/$defs/id"
+        },
+        "action": {
+          "enum": [
+            "detect",
+            "classify",
+            "assess",
+            "respond"
+          ]
+        },
+        "skill_tags": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/skillTag"
+          }
+        },
+        "expected_values": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        },
+        "branches": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "correct",
+            "incorrect",
+            "timeout"
+          ],
+          "properties": {
+            "correct": {
+              "$ref": "#/$defs/nodeReference"
+            },
+            "incorrect": {
+              "$ref": "#/$defs/nodeReference"
+            },
+            "timeout": {
+              "$ref": "#/$defs/nodeReference"
+            }
+          }
+        }
+      }
+    },
+    "nodeReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{2,63}$"
+    }
+  }
+}

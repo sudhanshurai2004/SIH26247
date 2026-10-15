@@ -1,0 +1,1564 @@
+# Native contract-v2 G1–G10 fixtures generated deterministically from the proposed reference pack.
+# They remain proposed training-only test data, not real doctrine or Blueprint-recovered data.
+fixture_contract_version: '2.0'
+note: Native v2 payload fixtures. No scoring sidecar is used.
+cases:
+  G1:
+    note: hostile, dt 2s, correct, best inner response. s=.2+.3+.35+.135=.985
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g1
+      generator_version: 2.0.0
+      seed: 5676922919367401
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 6000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: h1
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 5c9f0da9-2f38-5cb1-8bac-5d659ab694ec
+      session_id: 9ce3d665-86b2-5b4e-9b72-3584f18c0a58
+      scenario_id: golden-v2-g1
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 0
+      payload:
+        target_id: h1
+    - contract_version: '2.0'
+      event_id: 7a92c144-29dd-588a-8e19-40f9e6c797fc
+      session_id: 9ce3d665-86b2-5b4e-9b72-3584f18c0a58
+      scenario_id: golden-v2-g1
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 3000
+      sequence: 1
+      payload:
+        target_id: h1
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: a86ad2e5-4c8c-5ec7-a4fc-5d538f0a0e91
+      session_id: 9ce3d665-86b2-5b4e-9b72-3584f18c0a58
+      scenario_id: golden-v2-g1
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 5000
+      sequence: 2
+      payload:
+        target_id: h1
+        response: soft_response
+    expect:
+      total: 98.5
+      critical: []
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        h1: 0.985
+  G2:
+    note: 3 birds called hostile, one engaged. each s=.2+0+0+.135=.335; raw 33.5;
+      one critical -25 => 8.5
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g2
+      generator_version: 2.0.0
+      seed: 8686324075657570
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 4000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: b1
+        entity_class: bird
+        affiliation: non_hostile
+        training_class: bird
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: false
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: b2
+        entity_class: bird
+        affiliation: non_hostile
+        training_class: bird
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: false
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: b3
+        entity_class: bird
+        affiliation: non_hostile
+        training_class: bird
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: false
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: c98cd6c6-fd37-56d7-8bae-36ea022ff373
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 0
+      payload:
+        target_id: b1
+    - contract_version: '2.0'
+      event_id: 940c329d-b81b-5ca9-880c-75b1cb482e7d
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 2500
+      sequence: 1
+      payload:
+        target_id: b1
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: 7e2941ec-34bb-5ec7-8982-0fcca80d7a86
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 3000
+      sequence: 2
+      payload:
+        target_id: b1
+        response: hard_response
+    - contract_version: '2.0'
+      event_id: bf573228-f479-5773-8f5f-3263670f9eda
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 3
+      payload:
+        target_id: b2
+    - contract_version: '2.0'
+      event_id: 55a5da38-019c-597e-b4e3-b3e59420bc75
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 2500
+      sequence: 4
+      payload:
+        target_id: b2
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: 2dade90f-195b-5c72-9e11-145042867d29
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 5
+      payload:
+        target_id: b3
+    - contract_version: '2.0'
+      event_id: cd7aea28-5a29-5e46-ad1d-3677c71b46ff
+      session_id: c17d373d-3be9-5955-9424-2d998c08425e
+      scenario_id: golden-v2-g2
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 2500
+      sequence: 6
+      payload:
+        target_id: b3
+        classification: hostile_small_uas
+    expect:
+      total: 8.5
+      critical:
+      - engage_nonhostile:b1
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        b1: 0.335
+        b2: 0.335
+        b3: 0.335
+  G3:
+    note: friendly engaged. s=.2+.3+0+.12=.62; raw 62; -25=37; cap 30 => 30.0
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g3
+      generator_version: 2.0.0
+      seed: 2544466358801567
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 7000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: f1
+        entity_class: friendly_aircraft
+        affiliation: friendly
+        training_class: friendly_aircraft
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: false
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 42e015f9-3bd0-539a-ac84-f859eb0ac917
+      session_id: 8fb8c116-780a-5978-b3fb-4ec69c31ddf9
+      scenario_id: golden-v2-g3
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 4000
+      sequence: 0
+      payload:
+        target_id: f1
+    - contract_version: '2.0'
+      event_id: d7c42d26-732a-5d19-82e5-5b8adc928dc7
+      session_id: 8fb8c116-780a-5978-b3fb-4ec69c31ddf9
+      scenario_id: golden-v2-g3
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 5000
+      sequence: 1
+      payload:
+        target_id: f1
+        classification: friendly_aircraft
+    - contract_version: '2.0'
+      event_id: 7dcb9cc3-6c5e-5912-8ad1-70293949bb9f
+      session_id: 8fb8c116-780a-5978-b3fb-4ec69c31ddf9
+      scenario_id: golden-v2-g3
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 6000
+      sequence: 2
+      payload:
+        target_id: f1
+        response: soft_response
+    expect:
+      total: 30.0
+      critical:
+      - engage_nonhostile:f1
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        f1: 0.62
+  G4:
+    note: benign-only, all best responses at outer zone; each s=.985
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g4
+      generator_version: 2.0.0
+      seed: 3219903636637044
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 5000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: c1
+        entity_class: civil_uas
+        affiliation: non_hostile
+        training_class: civil_uas
+        assessment_truth: unknown
+        response_zone: outer
+        reaches_inner: false
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: b1
+        entity_class: bird
+        affiliation: non_hostile
+        training_class: bird
+        assessment_truth: unknown
+        response_zone: outer
+        reaches_inner: false
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 676f951e-48ed-5694-8588-cbeb8df59f39
+      session_id: 7b543329-d919-59d8-9d7f-d17e4ab4d1c2
+      scenario_id: golden-v2-g4
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 0
+      payload:
+        target_id: c1
+    - contract_version: '2.0'
+      event_id: 755d63e2-fafd-50ea-a66d-565812b4c990
+      session_id: 7b543329-d919-59d8-9d7f-d17e4ab4d1c2
+      scenario_id: golden-v2-g4
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 3000
+      sequence: 1
+      payload:
+        target_id: c1
+        classification: civil_uas
+    - contract_version: '2.0'
+      event_id: 31097bb8-fcca-53c2-8ea9-c596a3c062fd
+      session_id: 7b543329-d919-59d8-9d7f-d17e4ab4d1c2
+      scenario_id: golden-v2-g4
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 4000
+      sequence: 2
+      payload:
+        target_id: c1
+        response: observe_and_report
+    - contract_version: '2.0'
+      event_id: b93d412d-1bff-5e2d-9417-88386d689982
+      session_id: 7b543329-d919-59d8-9d7f-d17e4ab4d1c2
+      scenario_id: golden-v2-g4
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 3
+      payload:
+        target_id: b1
+    - contract_version: '2.0'
+      event_id: 8a8f669b-95fa-5bc6-8172-3a8f41d0f70e
+      session_id: 7b543329-d919-59d8-9d7f-d17e4ab4d1c2
+      scenario_id: golden-v2-g4
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 3000
+      sequence: 4
+      payload:
+        target_id: b1
+        classification: bird
+    - contract_version: '2.0'
+      event_id: d289dd20-b5f6-544f-bc30-2203eb442693
+      session_id: 7b543329-d919-59d8-9d7f-d17e4ab4d1c2
+      scenario_id: golden-v2-g4
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 4000
+      sequence: 5
+      payload:
+        target_id: b1
+        response: observe
+    expect:
+      total: 98.5
+      critical: []
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        c1: 0.985
+        b1: 0.985
+  G5:
+    note: 'late-appearing target: t_visible 40s, detect 52s => dt 12s (NOT 52s). time=.4;
+      s=.2+.3+.35+.06=.91'
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g5
+      generator_version: 2.0.0
+      seed: 5810664004851228
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 55000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: h1
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: outer
+        reaches_inner: false
+        t_visible_ms: 40000
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 8000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 9000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 10000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 11000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 12000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 13000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 14000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 15000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 16000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 17000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 18000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 19000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 20000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 21000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 22000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 23000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 24000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 25000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 26000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 27000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 28000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 29000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 30000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 31000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 32000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 33000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 34000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 35000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 36000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 37000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 38000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 39000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 40000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 41000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 42000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 43000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 44000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 45000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 46000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 47000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 48000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 49000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 50000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 51000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 52000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 53000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 54000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 55000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 86fac641-5989-5381-8234-5265293de855
+      session_id: d5077c89-5462-5765-8f82-2b830312e38d
+      scenario_id: golden-v2-g5
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 52000
+      sequence: 0
+      payload:
+        target_id: h1
+    - contract_version: '2.0'
+      event_id: 0e762756-b148-5a98-8435-7b17751acfbb
+      session_id: d5077c89-5462-5765-8f82-2b830312e38d
+      scenario_id: golden-v2-g5
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 53000
+      sequence: 1
+      payload:
+        target_id: h1
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: b122bc0b-855f-50af-8da8-f5efbdbf94ab
+      session_id: d5077c89-5462-5765-8f82-2b830312e38d
+      scenario_id: golden-v2-g5
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 54000
+      sequence: 2
+      payload:
+        target_id: h1
+        response: alert_and_track
+    expect:
+      total: 91.0
+      critical: []
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        h1: 0.91
+  G6:
+    note: 'swarm of 6: 4 handled (dt 4s, s=.97), 2 missed at inner (s=0, 2 criticals).
+      raw=388/6=64.67; -50 => 14.67'
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g6
+      generator_version: 2.0.0
+      seed: 5451545122222591
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 7000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: h1
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: h2
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 110.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: h3
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 120.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: h4
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 130.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: h5
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 140.0
+          y_m: 0.0
+          altitude_m: 100.0
+      - target_id: h6
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 7000
+          x_m: 150.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 0657282c-8331-5152-bdb3-5be199c926ac
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 4000
+      sequence: 0
+      payload:
+        target_id: h1
+    - contract_version: '2.0'
+      event_id: 5cc951d3-db45-55aa-aeaa-bf0f7adb3023
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 5000
+      sequence: 1
+      payload:
+        target_id: h1
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: e21de735-d3a0-56cf-b467-499efffdad28
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 6000
+      sequence: 2
+      payload:
+        target_id: h1
+        response: soft_response
+    - contract_version: '2.0'
+      event_id: 1861bdf8-1402-5c7a-b9d9-f199a5601175
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 4000
+      sequence: 3
+      payload:
+        target_id: h2
+    - contract_version: '2.0'
+      event_id: 4d773dfd-c7c0-585a-b9c4-282394f8ecf2
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 5000
+      sequence: 4
+      payload:
+        target_id: h2
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: 938fc3c5-7855-58ee-b05e-6b2a6822b962
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 6000
+      sequence: 5
+      payload:
+        target_id: h2
+        response: soft_response
+    - contract_version: '2.0'
+      event_id: fec387a8-61cc-5eab-9255-ccf66dd93aef
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 4000
+      sequence: 6
+      payload:
+        target_id: h3
+    - contract_version: '2.0'
+      event_id: 3d9a8e6e-157c-56d2-a0bf-13c818a7e490
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 5000
+      sequence: 7
+      payload:
+        target_id: h3
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: e5bb124a-a6dc-5e29-b01c-1e3e47d27156
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 6000
+      sequence: 8
+      payload:
+        target_id: h3
+        response: soft_response
+    - contract_version: '2.0'
+      event_id: ef2ef4bf-9a64-5491-b812-b50e9a53f59f
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 4000
+      sequence: 9
+      payload:
+        target_id: h4
+    - contract_version: '2.0'
+      event_id: 58e14150-1fa4-5c28-bc4a-70626521b33e
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 5000
+      sequence: 10
+      payload:
+        target_id: h4
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: dea95d88-81d4-57a5-9e23-2815414e200d
+      session_id: f9431fe7-b917-5b91-ac0f-c79c7e750a34
+      scenario_id: golden-v2-g6
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 6000
+      sequence: 11
+      payload:
+        target_id: h4
+        response: soft_response
+    expect:
+      total: 14.67
+      critical:
+      - miss_hostile_at_inner_zone:h5
+      - miss_hostile_at_inner_zone:h6
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        h1: 0.97
+        h2: 0.97
+        h3: 0.97
+        h4: 0.97
+        h5: 0.0
+        h6: 0.0
+  G7:
+    note: no action at all; hostile reaches inner => critical; floored at 0
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g7
+      generator_version: 2.0.0
+      seed: 1524206463843836
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 1000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: h1
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events: []
+    expect:
+      total: 0.0
+      critical:
+      - miss_hostile_at_inner_zone:h1
+      ignored_duplicates: 0
+      rating_eligible: true
+      per_target:
+        h1: 0.0
+  G8:
+    note: 'G1 events resent (offline outbox retry): 3 duplicate ids ignored, score
+      unchanged'
+    status: completed
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g8
+      generator_version: 2.0.0
+      seed: 4597521599547884
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 6000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: h1
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 5000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 6000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 372e7f6b-89d6-5a35-b38d-73866ff9cf0e
+      session_id: 001cc755-ec57-58f6-aa8c-0bf1996ec49b
+      scenario_id: golden-v2-g8
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 0
+      payload:
+        target_id: h1
+    - contract_version: '2.0'
+      event_id: d39b50f7-0898-5d8b-8368-23d3db2b7f01
+      session_id: 001cc755-ec57-58f6-aa8c-0bf1996ec49b
+      scenario_id: golden-v2-g8
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 3000
+      sequence: 1
+      payload:
+        target_id: h1
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: 98ef4c26-d99a-5e18-8079-9fcc8903d872
+      session_id: 001cc755-ec57-58f6-aa8c-0bf1996ec49b
+      scenario_id: golden-v2-g8
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 5000
+      sequence: 2
+      payload:
+        target_id: h1
+        response: soft_response
+    - contract_version: '2.0'
+      event_id: 372e7f6b-89d6-5a35-b38d-73866ff9cf0e
+      session_id: 001cc755-ec57-58f6-aa8c-0bf1996ec49b
+      scenario_id: golden-v2-g8
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 0
+      payload:
+        target_id: h1
+    - contract_version: '2.0'
+      event_id: d39b50f7-0898-5d8b-8368-23d3db2b7f01
+      session_id: 001cc755-ec57-58f6-aa8c-0bf1996ec49b
+      scenario_id: golden-v2-g8
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 3000
+      sequence: 1
+      payload:
+        target_id: h1
+        classification: hostile_small_uas
+    - contract_version: '2.0'
+      event_id: 98ef4c26-d99a-5e18-8079-9fcc8903d872
+      session_id: 001cc755-ec57-58f6-aa8c-0bf1996ec49b
+      scenario_id: golden-v2-g8
+      trainee_id: golden-trainee
+      event_type: respond
+      t_offset_ms: 5000
+      sequence: 2
+      payload:
+        target_id: h1
+        response: soft_response
+    expect:
+      total: 98.5
+      critical: []
+      ignored_duplicates: 3
+      rating_eligible: true
+      per_target:
+        h1: 0.985
+  G9:
+    note: 'interrupted session: no miss-critical, s=.2+.3+0+.135=.635, excluded from
+      ratings'
+    status: interrupted
+    scenario:
+      contract_version: '2.0'
+      scenario_id: golden-v2-g9
+      generator_version: 2.0.0
+      seed: 4287584182429254
+      profile:
+        profile_id: golden-v2-fixture
+        difficulty: 1
+        skill_tags:
+        - detection
+        - classification
+        - assessment
+        - response
+      duration_ms: 4000
+      time_step_ms: 1000
+      coordinate_system: local_enu_m
+      environment:
+        terrain: abstract_flat
+        time_of_day: day
+        weather: clear
+      targets:
+      - target_id: h1
+        entity_class: uas
+        affiliation: simulated_threat
+        training_class: hostile_small_uas
+        assessment_truth: unknown
+        response_zone: inner
+        reaches_inner: true
+        t_visible_ms: 0
+        trajectory:
+        - t_ms: 0
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 1000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 2000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 3000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+        - t_ms: 4000
+          x_m: 100.0
+          y_m: 0.0
+          altitude_m: 100.0
+    events:
+    - contract_version: '2.0'
+      event_id: 4c28b7d5-11e7-5a8a-aad6-4a1cd33162bd
+      session_id: 5579c581-5c06-5759-b82a-459f76183a76
+      scenario_id: golden-v2-g9
+      trainee_id: golden-trainee
+      event_type: detect
+      t_offset_ms: 2000
+      sequence: 0
+      payload:
+        target_id: h1
+    - contract_version: '2.0'
+      event_id: 9e9777ae-7aa3-56f2-8372-de3a595f2b40
+      session_id: 5579c581-5c06-5759-b82a-459f76183a76
+      scenario_id: golden-v2-g9
+      trainee_id: golden-trainee
+      event_type: classify
+      t_offset_ms: 3000
+      sequence: 1
+      payload:
+        target_id: h1
+        classification: hostile_small_uas
+    expect:
+      total: 63.5
+      critical: []
+      ignored_duplicates: 0
+      rating_eligible: false
+      per_target:
+        h1: 0.635
+  G10:
+    note: 'invalid doctrine upload: weights sum 1.1 -> rejected, previous doctrine
+      stays active (apply in API layer)'
+    invalid_doctrine_override:
+      scoring:
+        weights:
+          detect: 0.25
+          classify: 0.3
+          assess: 0.0
+          respond: 0.35
+          time: 0.2
+    expect_errors:
+    - weights_sum_invalid

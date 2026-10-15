@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sih26247.local/contracts/scenario_v2.schema.json",
+  "title": "SIH 26247 Scenario Contract v2",
+  "description": "Versioned deterministic training scenario with synthetic per-target class, zone, and protected-zone outcome metadata. Logical times only; no real-world sensor or operational data.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "scenario_id",
+    "generator_version",
+    "seed",
+    "profile",
+    "duration_ms",
+    "time_step_ms",
+    "coordinate_system",
+    "environment",
+    "targets"
+  ],
+  "properties": {
+    "contract_version": { "const": "2.0" },
+    "scenario_id": { "$ref": "#/$defs/id" },
+    "generator_version": { "$ref": "#/$defs/semver" },
+    "seed": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_id", "difficulty", "skill_tags"],
+      "properties": {
+        "profile_id": { "$ref": "#/$defs/id" },
+        "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "skill_tags": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/skillTag" }
+        }
+      }
+    },
+    "duration_ms": { "type": "integer", "minimum": 1000, "maximum": 86400000 },
+    "time_step_ms": { "type": "integer", "minimum": 100, "maximum": 60000 },
+    "coordinate_system": { "const": "local_enu_m" },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["terrain", "time_of_day", "weather"],
+      "properties": {
+        "terrain": { "enum": ["abstract_flat", "rural", "urban"] },
+        "time_of_day": { "enum": ["day", "night", "dawn_dusk"] },
+        "weather": { "enum": ["clear", "haze", "rain"] }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/target" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]{1,63}$" },
+    "semver": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$" },
+    "skillTag": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{1,31}$" },
+    "trainingClass": { "type": "string", "pattern": "^[a-z][a-z0-9_]{1,31}$" },
+    "trajectoryPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["t_ms", "x_m", "y_m", "altitude_m"],
+      "properties": {
+        "t_ms": { "type": "integer", "minimum": 0 },
+        "x_m": { "type": "number" },
+        "y_m": { "type": "number" },
+        "altitude_m": { "type": "number", "minimum": 0 }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_id",
+        "entity_class",
+        "affiliation",
+        "training_class",
+        "assessment_truth",
+        "response_zone",
+        "reaches_inner",
+        "t_visible_ms",
+        "trajectory"
+      ],
+      "properties": {
+        "target_id": { "$ref": "#/$defs/id" },
+        "entity_class": { "enum": ["uas", "bird", "civil_uas", "friendly_aircraft", "balloon"] },
+        "affiliation": { "enum": ["unknown", "friendly", "non_hostile", "simulated_threat"] },
+        "training_class": { "$ref": "#/$defs/trainingClass" },
+        "assessment_truth": { "enum": ["unknown", "low", "medium", "high"] },
+        "response_zone": { "enum": ["outer", "inner"] },
+        "reaches_inner": { "type": "boolean" },
+        "t_visible_ms": { "type": "integer", "minimum": 0 },
+        "trajectory": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/trajectoryPoint" }
+        }
+      }
+    }
+  }
+}

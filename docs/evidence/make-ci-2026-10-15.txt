@@ -1,0 +1,63 @@
+$ make ci
+".venv/bin/python" -m ruff check core tests experiments scripts
+All checks passed!
+".venv/bin/python" -m ruff format --check core tests experiments scripts
+59 files already formatted
+".venv/bin/python" -m pytest
+============================= test session starts ==============================
+platform linux -- Python 3.11.2, pytest-8.3.5, pluggy-1.6.0
+rootdir: /home/user/SIH26247
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 111 items
+
+tests/api/test_health.py ..                                              [  1%]
+tests/api/test_local_workflow.py ...                                     [  4%]
+tests/contracts/test_contract_samples.py .............                   [ 16%]
+tests/contracts/test_v2_contracts_and_migration.py .......               [ 22%]
+tests/generator/test_v0.py ......                                        [ 27%]
+tests/generator/test_v1.py .....                                         [ 32%]
+tests/golden/test_core_golden.py ..........                              [ 41%]
+tests/golden/test_golden_reference.py ..........                         [ 50%]
+tests/golden/test_production_v1_golden.py ...........                    [ 60%]
+tests/golden/test_production_v2_golden.py .............                  [ 72%]
+tests/scoring/test_engine.py .........                                   [ 80%]
+tests/sessions/test_manager.py .......                                   [ 86%]
+tests/test_adaptive_and_hardening.py .........                           [ 94%]
+tests/test_client_assets.py ..                                           [ 96%]
+tests/test_demo_assets.py .                                              [ 97%]
+tests/test_experiments.py .                                              [ 98%]
+tests/test_replay.py ..                                                  [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/starlette/testclient.py:37
+  /home/user/SIH26247/.venv/lib/python3.11/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 111 passed, 1 warning in 19.11s ========================
+PYTHONPATH=. ".venv/bin/python" scripts/self_test.py
+{"rating_eligible": true, "scenario_id": "scenario-4f38d04fd72b2af0", "score": 100.0, "status": "ok"}
+PYTHONPATH=. ".venv/bin/python" scripts/demo_smoke.py
+DEMO_SMOKE_OK: seeded three disposable ready sessions
+DEMO_SMOKE_OK: health=ok instructor=instructor trainee=trainee
+DEMO_SMOKE_OK: generic doctrine=generic-demo-v1@1.0.0
+DEMO_SMOKE_OK: scripted score=100.0 replay_targets=1
+DEMO_SMOKE_OK: night-rain score=100.0
+DEMO_SMOKE_OK: unit_completed_sessions=2 trend_points=1
+DEMO_SMOKE_BOUNDARY: native Godot interaction, rendering, and FPS were not run
+npm --prefix dashboard run build
+
+> sih26247-dashboard@0.1.0 build
+> tsc -b && vite build
+
+vite v6.4.4 building for production...
+transforming...
+✓ 28 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/index-DsoXJVMQ.css    5.36 kB │ gzip:  1.91 kB
+dist/assets/index-BO8luYNH.js   158.74 kB │ gzip: 50.52 kB
+✓ built in 811ms

@@ -1,0 +1,36 @@
+$ PYTHONPATH=. .venv/bin/python scripts/test_offline_wheelhouse.py --wheelhouse wheelhouse
+Looking in links: /home/user/SIH26247/wheelhouse, /home/user/SIH26247/wheelhouse
+Processing ./wheelhouse/PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing ./wheelhouse/sqlalchemy-2.1.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
+Processing ./wheelhouse/annotated_types-0.8.0-py3-none-any.whl
+Processing ./wheelhouse/anyio-4.15.1-py3-none-any.whl
+Processing ./wheelhouse/attrs-26.1.0-py3-none-any.whl
+Processing ./wheelhouse/certifi-2026.7.22-py3-none-any.whl
+Processing ./wheelhouse/click-8.5.0-py3-none-any.whl
+Processing ./wheelhouse/fastapi-0.115.12-py3-none-any.whl
+Processing ./wheelhouse/h11-0.16.0-py3-none-any.whl
+Processing ./wheelhouse/httpcore-1.0.9-py3-none-any.whl
+Processing ./wheelhouse/httpx-0.28.1-py3-none-any.whl
+Processing ./wheelhouse/idna-3.20-py3-none-any.whl
+Processing ./wheelhouse/iniconfig-2.3.1-py3-none-any.whl
+Processing ./wheelhouse/jsonschema_specifications-2025.9.1-py3-none-any.whl
+Processing ./wheelhouse/jsonschema-4.23.0-py3-none-any.whl
+Processing ./wheelhouse/numpy-2.2.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing ./wheelhouse/packaging-26.3-py3-none-any.whl
+Processing ./wheelhouse/pluggy-1.6.0-py3-none-any.whl
+Processing ./wheelhouse/pydantic-2.14.1-py3-none-any.whl
+Processing ./wheelhouse/pydantic_core-2.50.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing ./wheelhouse/pytest-8.3.5-py3-none-any.whl
+Processing ./wheelhouse/referencing-0.37.0-py3-none-any.whl
+Processing ./wheelhouse/rpds_py-2026.9.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing ./wheelhouse/ruff-0.11.7-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+Processing ./wheelhouse/starlette-0.46.2-py3-none-any.whl
+Processing ./wheelhouse/typing_inspection-0.4.4-py3-none-any.whl
+Processing ./wheelhouse/typing_extensions-4.16.0-py3-none-any.whl
+Processing ./wheelhouse/uvicorn-0.34.2-py3-none-any.whl
+Installing collected packages: typing_extensions, ruff, rpds-py, PyYAML, pluggy, packaging, numpy, iniconfig, idna, h11, click, certifi, attrs, annotated-types, uvicorn, typing-inspection, SQLAlchemy, referencing, pytest, pydantic_core, httpcore, anyio, starlette, pydantic, jsonschema-specifications, httpx, jsonschema, fastapi
+Successfully installed PyYAML-6.0.2 SQLAlchemy-2.1.4 annotated-types-0.8.0 anyio-4.15.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 fastapi-0.115.12 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 iniconfig-2.3.1 jsonschema-4.23.0 jsonschema-specifications-2025.9.1 numpy-2.2.5 packaging-26.3 pluggy-1.6.0 pydantic-2.14.1 pydantic_core-2.50.1 pytest-8.3.5 referencing-0.37.0 rpds-py-2026.9.1 ruff-0.11.7 starlette-0.46.2 typing-inspection-0.4.4 typing_extensions-4.16.0 uvicorn-0.34.2
+No broken requirements found.
+OFFLINE_WHEELHOUSE_IMPORT_OK
++ /tmp/sih26247-offline-wheelhouse-8ytvra4s/venv/bin/python -m pip install --no-index --find-links /home/user/SIH26247/wheelhouse --requirement /home/user/SIH26247/requirements-dev.lock
+OFFLINE_WHEELHOUSE_TEST_OK: clean venv installed with --no-index from wheelhouse only

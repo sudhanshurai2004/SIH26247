@@ -1,0 +1,154 @@
+# Native contract-v2 fixture converted from the proposed G1–G10 reference spec.
+# TRAINING ONLY; NOT REAL DOCTRINE.
+contract_version: '2.0'
+doctrine_id: golden-generic-v2
+version: 2.0.0
+title: Proposed Golden Generic V2 Placeholder
+label: "TRAINING-ONLY PROPOSED GOLDEN TEST FIXTURE \u2014 NOT REAL DOCTRINE"
+training_only: true
+classes:
+- hostile_small_uas
+- civil_uas
+- bird
+- friendly_aircraft
+- clutter
+partial_credit:
+  hostile_small_uas:
+  - civil_uas
+scoring:
+  max_score: 100
+  weights:
+    detect: 0.2
+    classify: 0.3
+    assess: 0.0
+    respond: 0.35
+    time: 0.15
+  detection_delay:
+    max_ms: 20000
+  session_aggregate:
+    method: mean_per_target
+    floor_score: 0
+  critical_rules:
+    engage_nonhostile:
+      penalty_points: 25
+      protected_classes:
+      - civil_uas
+      - bird
+      - friendly_aircraft
+      - clutter
+    miss_hostile_at_inner_zone:
+      penalty_points: 25
+      hostile_classes:
+      - hostile_small_uas
+  friendly_score_cap:
+    cap_score: 30
+    trigger_classes:
+    - friendly_aircraft
+roe:
+  allowed_responses:
+  - alert_and_track
+  - hard_response
+  - hold_fire
+  - observe
+  - observe_and_report
+  - soft_response
+  - warn
+  engagement_actions:
+  - soft_response
+  - hard_response
+  no_weapon_or_targeting: true
+response_matrix:
+  hostile_small_uas:
+    outer:
+      best:
+      - alert_and_track
+      acceptable:
+      - observe
+    inner:
+      best:
+      - soft_response
+      acceptable:
+      - hard_response
+      - alert_and_track
+  civil_uas:
+    outer:
+      best:
+      - observe_and_report
+      acceptable:
+      - observe
+    inner:
+      best:
+      - warn
+      acceptable:
+      - observe_and_report
+  bird:
+    outer:
+      best:
+      - observe
+      acceptable: []
+    inner:
+      best:
+      - observe
+      acceptable: []
+  friendly_aircraft:
+    outer:
+      best:
+      - observe
+      acceptable: []
+    inner:
+      best:
+      - hold_fire
+      acceptable:
+      - observe
+  clutter:
+    outer:
+      best:
+      - observe
+      acceptable: []
+    inner:
+      best:
+      - observe
+      acceptable: []
+decision_tree:
+  root_node_id: detect-node
+  nodes:
+  - node_id: detect-node
+    action: detect
+    skill_tags:
+    - detection
+    expected_values:
+    - detected
+    branches:
+      correct: classify-node
+      incorrect: classify-node
+      timeout: classify-node
+  - node_id: classify-node
+    action: classify
+    skill_tags:
+    - classification
+    expected_values:
+    - hostile_small_uas
+    branches:
+      correct: assess-node
+      incorrect: assess-node
+      timeout: assess-node
+  - node_id: assess-node
+    action: assess
+    skill_tags:
+    - assessment
+    expected_values:
+    - unknown
+    branches:
+      correct: respond-node
+      incorrect: respond-node
+      timeout: respond-node
+  - node_id: respond-node
+    action: respond
+    skill_tags:
+    - response
+    expected_values:
+    - alert_and_track
+    branches:
+      correct: null
+      incorrect: null
+      timeout: null

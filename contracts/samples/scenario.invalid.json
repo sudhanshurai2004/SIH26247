@@ -1,0 +1,42 @@
+{
+  "contract_version": "1.0",
+  "scenario_id": "demo-v0-0001",
+  "generator_version": "0.1.0",
+  "seed": -1,
+  "profile": {
+    "profile_id": "intro-single-target",
+    "difficulty": 1,
+    "skill_tags": [
+      "detection"
+    ]
+  },
+  "duration_ms": 10000,
+  "time_step_ms": 1000,
+  "coordinate_system": "local_enu_m",
+  "environment": {
+    "terrain": "abstract_flat",
+    "time_of_day": "day",
+    "weather": "clear"
+  },
+  "targets": [
+    {
+      "target_id": "target-01",
+      "entity_class": "uas",
+      "affiliation": "simulated_threat",
+      "trajectory": [
+        {
+          "t_ms": 0,
+          "x_m": -500.0,
+          "y_m": 0.0,
+          "altitude_m": 120.0
+        },
+        {
+          "t_ms": 10000,
+          "x_m": 500.0,
+          "y_m": 0.0,
+          "altitude_m": 120.0
+        }
+      ]
+    }
+  ]
+}

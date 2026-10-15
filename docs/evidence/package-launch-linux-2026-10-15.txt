@@ -1,0 +1,3 @@
+$ ./out/SIH26247-offline-trainer/launch.sh (background; package-local .venv linked for this Linux smoke)
+{"status":"ok","stage":"8","offline_only":true}
+<title>SIH 26247 Offline Trainer</title>

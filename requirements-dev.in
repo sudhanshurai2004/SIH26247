@@ -1,0 +1,5 @@
+# Direct development and test dependencies. Exact resolved pins live in requirements-dev.lock.
+-r requirements.in
+httpx==0.28.1
+pytest==8.3.5
+ruff==0.11.7
