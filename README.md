@@ -5,9 +5,8 @@
 > control, targeting, real doctrine, real sensor feed, or real
 > electronic-warfare interface.
 
-`SIH26247` remains in the repository/package/environment-variable names as an
-intentional legacy technical identifier; the human-facing problem ID is 26247.
-See [`docs/DECISIONS.md`](docs/DECISIONS.md#d-011--blueprint-source-and-corrected-problem-identifier-2026-10-15).
+The repository name matches problem ID 26247. See
+[`docs/DECISIONS.md`](docs/DECISIONS.md#d-011--repository-name-matches-problem-identifier-2026-10-15).
 
 The local product consists of:
 

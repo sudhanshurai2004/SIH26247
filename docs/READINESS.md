@@ -3,8 +3,7 @@
 **Scope:** offline, local, training-only software. This is not a weapon,
 targeting, operational-doctrine, real-sensor, or real-EW product. The governing
 source is [`docs/input/SIH 26247 Execution Blueprint.md`](input/SIH%2026247%20Execution%20Blueprint.md).
-`SIH26247` is a retained technical repository/package alias; the human-facing
-problem identifier is 26247.
+The repository name matches problem identifier 26247.
 
 ## Evidence policy
 
